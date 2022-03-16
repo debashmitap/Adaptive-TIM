@@ -10,4 +10,5 @@ The algorithm uses TIM https://arxiv.org/pdf/1404.0900v2.pdf as a blackbox to se
 # Changing the diffusion model and the epsilon
 
 The default underlying diffusion model is set to the independent cascade (IC) model. In order to change it to Linear Threshold, visit line 48 of blackbox.sh and change it to ./tim -model LT -dataset ${temp} -epsilon 0.05 -k 1.
+
 The epsilon value can also be modified in the same line from 0.05 to any value of your choice.
