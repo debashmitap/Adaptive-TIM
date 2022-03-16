@@ -6,6 +6,7 @@ The algorithm uses *TIM+ (https://arxiv.org/pdf/1404.0900v2.pdf)* as a blackbox 
 2. To generate the realizations on the nethept dataset, run *./realizations.sh nethept (no. of realizations)*. Eg. for *50 realizations*, `./realizations.sh nethept 50`
 3. Finally, use *./blackbox.sh nethept (no. of seeds) (no. of realizations)* to get the results which will be stored in *spread.csv* file. Eg. for *100 seeds* and *20 realizations*, `./blackbox.sh nethept 100 20`
 
+**N.B.** In case there is an error like this, *zsh: permission denied: ./filename* for MacOS, use *chmod +x ./filename* to resolve the issue. Eg. `chmod +x ./compile.sh`.
 
 ## Changing the diffusion model and epsilon
 
