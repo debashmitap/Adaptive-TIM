@@ -1,6 +1,6 @@
 # Adaptive-TIM
 
-The algorithm uses *TIM https://arxiv.org/pdf/1404.0900v2.pdf* as a blackbox to select the best seed node at every step of the adptive seed selection process.
+The algorithm uses *TIM+ (https://arxiv.org/pdf/1404.0900v2.pdf)* as a blackbox to select the best seed node at every step of the adptive seed selection process.
 
 1. To compile the project, run `./compile.sh` in your terminal.
 2. To generate the realizations on the nethept dataset, run *./realizations.sh nethept (no. of realizations)*. Eg. for *50 realizations*, `./realizations.sh nethept 50`
