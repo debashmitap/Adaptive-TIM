@@ -16,7 +16,6 @@ blalba this is old blabla
 #include <sys/time.h>
 #else //linux
 #include <sys/time.h>
-#include <omp.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>

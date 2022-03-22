@@ -34,10 +34,11 @@ while [ ${realization} -lt ${r} ]; do
     echo "=========================================="
     i=0
     realization_influence=0
+    remaining_nodes=`cat ${temp}/n.txt`
 
     # For each seed node until we reach k or there are no more edges to activate
     # while [[ -s ${temp}/graph_ic.inf && -s ${temp}/realization_${realization} && ${i} -lt ${k} ]]; do
-    while [ ${i} -lt ${k} ]; do
+    while [[ ${i} -lt ${k}  && ${remaining_nodes} -gt 0 ]]; do
 
         echo "=========================================="
 
@@ -45,12 +46,13 @@ while [ ${realization} -lt ${r} ]; do
         echo "Realization nº ${realization}; Seed nº ${i}"
 
         echo "Running TIM"
-        ./tim -model IC -dataset ${temp} -epsilon 0.05 -k 1
+        ./tim -model IC -dataset ${temp} -epsilon 0.2 -k 1 -n ${remaining_nodes}
 
         echo "Running BFS"
         influence=`./bfs ${temp} seed.txt ${realization}` 
         realization_influence=`expr $realization_influence + $influence`
         echo "Influence for seed ${i}: ${realization_influence}"
+        remaining_nodes=`expr ${remaining_nodes} - ${influence}`
 
         # Adds data to CSV file
         echo "${realization},${i},${realization_influence}" >> spread.csv

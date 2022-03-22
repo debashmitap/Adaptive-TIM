@@ -1,6 +1,8 @@
 class TimGraph: public InfGraph
 {
     public:
+        int n_prime;
+
         TimGraph(string folder, string graph_file):InfGraph(folder, graph_file ){
             visitedNodes = vector<bool>(n+1, false);
             readActivated(folder+"visited.txt");   
@@ -31,8 +33,12 @@ class TimGraph: public InfGraph
         double algo2(){
             double lb=1/2.0;
             double c=0;
+            if(n_prime == 1)
+            {
+                return 1;
+            }
             while(true){
-                int loop= (6 * log(n)  +  6 * log(log(n)/ log(2)) )* 1/lb  ;
+                int loop= (6 * log(n_prime)  +  6 * log(log(n_prime)/ log(2)) )* 1/lb  ;
                 c=0;
                 IF_TRACE(int64 now=rdtsc());
                 double sumMgTu=0;
@@ -47,7 +53,7 @@ class TimGraph: public InfGraph
                 if(c>lb) break;
                 lb /= 2;
             }
-            return c * n;
+            return c * n_prime;
         }
         double KptEstimation()
         {
@@ -59,8 +65,11 @@ class TimGraph: public InfGraph
         void RefindKPT(double epsilon, double ept){
             Timer t(2, "step2" );
             ASSERT(ept > 0);
-            int64 R = (2 + epsilon) * ( n * log(n) ) / ( epsilon * epsilon * ept);
+            cout << "EPT: " << ept << endl;
+            int64 R = (2 + epsilon) * ( n_prime * log(n_prime) ) / ( epsilon * epsilon * ept);
+            cout << "Refind KPT value for R: " << R << endl;
             BuildHypergraphR(R);
+            cout << "Number of RR sets: " << hyperGT.size() << endl;
         }
         double logcnk(int n, int k){
             double ans=0;
@@ -75,8 +84,11 @@ class TimGraph: public InfGraph
         void NodeSelection(double epsilon, double opt){
             Timer t(3, "step3");
             ASSERT(opt > 0);
-            int64 R = (8+2 * epsilon) * ( log(n) + log(2) +  n * logcnk(n, k) ) / ( epsilon * epsilon * opt);
+            cout << "OPT: " << opt << endl;
+            int64 R = (8+2 * epsilon) * ( log(n_prime) + log(2) +  n_prime * logcnk(n_prime, k) ) / ( epsilon * epsilon * opt);
+            cout << "Node Selection value for R: " << R << endl;
             BuildHypergraphR(R);
+            cout << "Number of RR sets: " << hyperGT.size() << endl;
             BuildSeedSet();
         }
         void EstimateOPT(double epsilon){

@@ -1,0 +1,16 @@
+.DS_Store
+bfs
+tim
+realization
+
+seed.txt
+seeds.txt
+influence.txt
+spread.csv
+readme.txt
+
+temp/
+simple/
+
+**/realization_*
+**/n.txt

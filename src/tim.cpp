@@ -8,7 +8,7 @@
 #include "memoryusage.h"
 #include "graph.h"
 
-void run(TimGraph & m, string dataset, int k, double epsilon, string model ){
+void run(TimGraph & m, string dataset, int k, double epsilon, string model, int n_prime){
     cout << "dataset:" << dataset << " k:" << k << " epsilon:"<< epsilon <<   " model:" << model << endl;
     m.k=k;
     if(model=="IC")
@@ -17,6 +17,8 @@ void run(TimGraph & m, string dataset, int k, double epsilon, string model ){
         m.setInfuModel(InfGraph::LT);
     else
         ASSERT(false);
+
+    m.n_prime = n_prime;
 
     cout<<"Finish Read Graph, Start Influence Maximization"<<endl;
     m.EstimateOPT(epsilon);
@@ -46,6 +48,7 @@ void parseArg(int argn, char ** argv)
     double epsilon=0;
     string model="";
     int k=0;
+    int n_prime=0;
 
     for(int i=0; i<argn; i++)
     {
@@ -64,6 +67,7 @@ void parseArg(int argn, char ** argv)
             else
                 ExitMessage("model should be IC or LT");
         }
+        if(argv[i]==string("-n")) n_prime=atoi(argv[i+1]);
     }
     if (dataset=="")
         ExitMessage("argument dataset missing");
@@ -82,7 +86,7 @@ void parseArg(int argn, char ** argv)
         graph_file=dataset + "graph_lt.inf";
 
     TimGraph m(dataset, graph_file);
-    run(m, dataset, k ,  epsilon, model );
+    run(m, dataset, k ,  epsilon, model, n_prime);
 }
 
 

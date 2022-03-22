@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 	int gap = 2 * sizeof(int)+sizeof(double);
 	//ASSERT(fin != false);
 	
-	cout << n << " " << m << endl;
+	cout << n << endl;
 	
 	vector<vector<int> > in_edge = readFile(graph_file, n, m);
 

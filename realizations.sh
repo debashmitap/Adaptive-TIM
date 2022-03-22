@@ -6,4 +6,4 @@ r=${2}
 echo "Generating new realizations"
 
 rm ${dataset}/realization_*
-./realization ${dataset}/ ${r}
+./realization ${dataset}/ ${r} > ${dataset}/n.txt
