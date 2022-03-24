@@ -35,6 +35,8 @@ while [ ${realization} -lt ${r} ]; do
     i=0
     realization_influence=0
     remaining_nodes=`cat ${temp}/n.txt`
+    rm ${temp}/visited.txt
+    touch ${temp}/visited.txt
 
     # For each seed node until we reach k or there are no more edges to activate
     # while [[ -s ${temp}/graph_ic.inf && -s ${temp}/realization_${realization} && ${i} -lt ${k} ]]; do
@@ -53,6 +55,7 @@ while [ ${realization} -lt ${r} ]; do
         realization_influence=`expr $realization_influence + $influence`
         echo "Influence for seed ${i}: ${realization_influence}"
         remaining_nodes=`expr ${remaining_nodes} - ${influence}`
+        # echo ${remaining_nodes} > ${temp}/n.txt
 
         # Adds data to CSV file
         echo "${realization},${i},${realization_influence}" >> spread.csv
