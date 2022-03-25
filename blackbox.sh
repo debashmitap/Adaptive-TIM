@@ -21,7 +21,7 @@ rm spread.csv
 touch spread.csv
 
 # Add header to CSV file
-echo "realization,seed,spread" >> spread.csv
+echo "realization,seed,spread,seed_id,time" >> spread.csv
 
 realization=0
 total_influence=0
@@ -45,17 +45,23 @@ while [ ${realization} -lt ${r} ]; do
         i=`expr $i + 1`
         echo "Realization nº ${realization}; Seed nº ${i}"
 
-        echo "Running TIM"
-        ./tim -model IC -dataset ${temp} -epsilon 0.2 -k 1 -n ${remaining_nodes}
+        echo "./iteration.sh ${temp} ${remaining_nodes} ${realization}"
+        # gtime -f'%E' ./iteration.sh ${temp} ${remaining_nodes} ${realization} -o time.txt
 
-        echo "Running BFS"
-        influence=`./bfs ${temp} seed.txt ${realization}` 
+        gtime -f'%E' -o time.txt ./tim -model IC -dataset ${temp} -epsilon 0.05 -k 1 -n ${remaining_nodes}; ./bfs ${temp} seed.txt ${realization}
+
+        # ./tim -model IC -dataset ${temp} -epsilon 0.05 -k 1 -n ${remaining_nodes}
+        # influence=`./bfs ${temp} seed.txt ${realization}` 
+
+        iteration_time=`cat time.txt`
+        influence=`cat ${temp}/visited_count.txt`
         realization_influence=`expr $realization_influence + $influence`
         echo "Influence for seed ${i}: ${realization_influence}"
         remaining_nodes=`expr ${remaining_nodes} - ${influence}`
+        seed_id=`cat seed.txt`
 
         # Adds data to CSV file
-        echo "${realization},${i},${realization_influence}" >> spread.csv
+        echo "${realization},${i},${realization_influence},${seed_id},${iteration_time}" >> spread.csv
 
         echo "Storing seed"
         cat seed.txt >> seeds.txt
