@@ -191,7 +191,12 @@ int main(int argc, char* argv[]) {
 
     int num_nodes = n - visitedCount;
 
-    cout << visitedCount << endl;
+    // cout << visitedCount << endl;
+
+    ofstream visitedCountfile;
+    visitedCountfile.open(folder+"/visited_count.txt");
+    visitedCountfile << visitedCount << endl;
+    visitedCountfile.close();
 
     ofstream visitedfile;
     visitedfile.open(visited_file, ios_base::app);
