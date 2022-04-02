@@ -17,4 +17,4 @@ The *epsilon* value can also be modified in the same line from *0.05* to any val
 
 ## To generate your own random graph
 
-Run the Python script random_gg.py to generate your own NetworkX Erdos-Renyi graph. In the function, gnp_random_graph (n,p,seed=None,directed=boolean): change the value of n to represent the number of nodes in the graph (it is set to 100000), p is the probability of edge creation (it is set to 0.01), directed is set to TRUE because it is a directed graph.
+Run the Python script random_gg.py to generate your own NetworkX Erdos-Renyi graph. In the function, gnp_random_graph(n,p,seed=None,directed=boolean): change the value of n to represent the number of nodes in the graph (it is set to 100000), p is the probability of edge creation (it is set to 0.01), directed is set to TRUE because it is a directed graph.
