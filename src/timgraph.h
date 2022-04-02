@@ -84,12 +84,12 @@ class TimGraph: public InfGraph
         void NodeSelection(double epsilon, double opt){
             Timer t(3, "step3");
             ASSERT(opt > 0);
-            cout << "OPT: " << opt << endl;
-            // int64 R = (8+2 * epsilon) * ( log(n_prime) + log(2) +  n_prime * logcnk(n_prime, k) ) / ( epsilon * epsilon * opt);
-            // cout << "Node Selection value for R: " << R << endl;
-            // BuildHypergraphR(R);
-            // cout << "Number of RR sets: " << hyperGT.size() << endl;
-            // BuildSeedSet();
+            //cout << "OPT: " << opt << endl;
+         //int64 R = (8+2 * epsilon) * ( log(n_prime) + log(2) +  n_prime * logcnk(n_prime, k) ) / ( epsilon * epsilon * opt);
+           //  cout << "Node Selection value for R: " << R << endl;
+           //  BuildHypergraphR(R);
+           //  cout << "Number of RR sets: " << hyperGT.size() << endl;
+        // BuildSeedSet();
         }
         void EstimateOPT(double epsilon){
             Timer t(100,"EstimateOPT");
