@@ -8,13 +8,13 @@ In the second part, we use TIM+ to generate the set of seeds, and then run the a
 3. For the *Facebook (http://snap.stanford.edu/data/ego-Facebook.html)* graph or any real world network datasets from *SNAP*, download the .txt file.
 4. To add weights to the edges run `change_weights.py dataset.txt`. The modified .txt file will be stored in weights_output.txt.
 5. Preprocess the dataset and rename the nodes by running `python3 preprocess_snap.py weights_output.txt dataset`. It creates a folder with the name of the dataset.
-To To sample a subgraph from the real world network, run *./sample dataset no.of nodes to sample*. Eg. for 1k nodes in the subgraph, `./sample dataset 1000`. It will create a file in the dataset folder with the name sample_1000. Go to step 4 and repeat the process.
-6. To generate the realizations on a dataset, run *./realizations.sh dataset_name (no. of realizations)*. Eg., for *50 realizations*, `./realizations.sh dataset_name 50`
-7. Finally, use *./blackbox.sh dataset (no. of seeds) (no. of starting realization) (no. of ending realization)* to get the results which will be stored in *spread.csv* file. Eg. for *100 seeds* and *50 realizations*, `./blackbox.sh dataset 100 0 49`
-8. Use the *merge_csv.py* to merge the parallel simulations into one .csv file. Eg For a dataset with 50 realizations run `python3 merge_csv.py dataset 50`.
+6. To sample a subgraph from the real world network, run *./sample dataset no.of nodes to sample*. Eg. for 1k nodes in the subgraph, `./sample dataset 1000`. It will create a file in the dataset folder with the name sample_1000. Go to step 4 and repeat the process.
+7. To generate the realizations on a dataset, run *./realizations.sh dataset_name (no. of realizations)*. Eg., for *50 realizations*, `./realizations.sh dataset_name 50`
+8. Finally, use *./blackbox.sh dataset (no. of seeds) (no. of starting realization) (no. of ending realization)* to get the results which will be stored in *spread.csv* file. Eg. for *100 seeds* and *50 realizations*, `./blackbox.sh dataset 100 0 49`
+9. Use the *merge_csv.py* to merge the parallel simulations into one .csv file. Eg For a dataset with 50 realizations run `python3 merge_csv.py dataset 50`.
 
 
-##Adaptive greedy with TIM seeds
+## Adaptive greedy with TIM seeds
 
 1. Run the original TIM to generate the set of seed nodes.
 2. Copy those seed nodes in a .txt file and name it seeds_0.05.txt and put it in the same folder as the dataset.
@@ -24,7 +24,7 @@ To To sample a subgraph from the real world network, run *./sample dataset no.of
 
 ## Changing the diffusion model and epsilon
 
-The default underlying diffusion model is set to the *independent cascade (IC) model*. In order to change it to *Linear Threshold*, visit *line 48* of *blackbox.sh* and change it to `./tim -model LT -dataset ${temp} -epsilon 0.05 -k 1`, and use the realizations_LT.sh file to generate the realizations for the LT model. 
+The default underlying diffusion model is set to the *independent cascade (IC) model*. In order to change it to *Linear Threshold*, visit *line 48* of *blackbox.sh* and change it to `./tim -model LT -dataset ${temp} -epsilon 0.05 -k 1`, and use the *realizations_LT.sh* file to generate the realizations for the LT model. 
 
 The *epsilon* value can also be modified in the same line from *0.05* to any value of your choice.
 
@@ -32,4 +32,5 @@ The *epsilon* value can also be modified in the same line from *0.05* to any val
 ## To generate your own random graph
 
 Run the Python script random_gg.py to generate your own NetworkX Erdos-Renyi graph. In the function, gnp_random_graph(n,p,seed=None,directed=boolean): change the value of n to represent the number of nodes in the graph (it is set to 100000), p is the probability of edge creation (it is set to 0.01), directed is set to TRUE because it is a directed graph.
+The *NetworkX graph library (https://networkx.org/documentation/stable/reference/generators.html* has all the graph generating funtions.
 
