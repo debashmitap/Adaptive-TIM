@@ -5,7 +5,7 @@ In the second part, we use TIM+ to generate the set of seeds, and then run the a
 
 1. To compile the project, run `./compile.sh` in your terminal.
 2. To generate the ER, WS, BA graph, run `python3 random_gg.py`. Use the NetworkX libraries `erdos_renyi_graph(), connected_watts_strogatz_graph(), barabasi_albert_graph()` with the desired number of nodes and parameters.
-3. For the *Facebook (http://snap.stanford.edu/data/ego-Facebook.html)* graph or any real world network datasets from *SNAP, download the .txt file.
+3. For the *Facebook (http://snap.stanford.edu/data/ego-Facebook.html)* graph or any real world network datasets from *SNAP*, download the .txt file.
 4. To add weights to the edges run `change_weights.py dataset.txt`. The modified .txt file will be stored in weights_output.txt.
 5. Preprocess the dataset and rename the nodes by running `python3 preprocess_snap.py weights_output.txt dataset`. It creates a folder with the name of the dataset.
 To To sample a subgraph from the real world network, run *./sample dataset no.of nodes to sample*. Eg. for 1k nodes in the subgraph, `./sample dataset 1000`. It will create a file in the dataset folder with the name sample_1000. Go to step 4 and repeat the process.
